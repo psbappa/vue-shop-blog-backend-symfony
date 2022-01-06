@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ColorRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -26,9 +25,10 @@ class Color
     #[ORM\ManyToMany(targetEntity: Product::class, mappedBy: 'colors')]
     private $colors;
 
-    public function __construct()
+    public function __construct(string $name, string $hexColor)
     {
-        $this->colors = new ArrayCollection();
+        $this->name = $name;
+        $this->hexColor = $hexColor;
     }
 
     public function getId(): ?int

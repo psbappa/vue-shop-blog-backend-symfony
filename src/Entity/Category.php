@@ -25,7 +25,7 @@ class Category
 
     public function __construct()
     {
-        $this->colors = new ArrayCollection();
+        $this->products = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -53,22 +53,22 @@ class Category
         return $this->products;
     }
 
-    public function addProduct(Product $color): self
+    public function addProduct(Product $product): self
     {
-        if (!$this->products->contains($color)) {
-            $this->products[] = $color;
-            $color->setCategory($this);
+        if (!$this->products->contains($product)) {
+            $this->products[] = $product;
+            $product->setCategory($this);
         }
 
         return $this;
     }
 
-    public function removeProduct(Product $color): self
+    public function removeProduct(Product $product): self
     {
-        if ($this->colors->removeElement($color)) {
+        if ($this->products->removeElement($product)) {
             // set the owning side to null (unless already changed)
-            if ($color->getCategory() === $this) {
-                $color->setCategory(null);
+            if ($product->getCategory() === $this) {
+                $product->setCategory(null);
             }
         }
 
