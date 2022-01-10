@@ -44,6 +44,15 @@ class Product
     #[ORM\ManyToMany(targetEntity: Color::class)]
     private $colors;
 
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private $createdAt;
+
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private $deletedAt;
+
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private $updatedAt;
+
     public function __construct()
     {
         $this->colors = new ArrayCollection();
@@ -170,6 +179,42 @@ class Product
     public function removeColor(Color $color): self
     {
         $this->colors->removeElement($color);
+
+        return $this;
+    }
+
+    public function getcreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setcreatedAt(?\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getDeletedAt(): ?\DateTimeInterface
+    {
+        return $this->deletedAt;
+    }
+
+    public function setDeletedAt(?\DateTimeInterface $deletedAt): self
+    {
+        $this->deletedAt = $deletedAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

@@ -42,20 +42,32 @@ class AppFixtures extends Fixture
         ];
 
         $brands = [
-            'Faux-Trendster',
-            'Low End Luxury',
-            'Rest at Work',
+            'Nokia',
+            'Samsung',
+            'Tata Docomo',
+        ];
+
+        $weight = [
+            "180",
+            "250",
+            "1500.00",
+            "250",
+            "2500.00",
+            "500",
+            "1000",
         ];
 
         foreach (self::getProductsData() as $productData) {
             $product = new Product();
+            $product->setCategory($categories[$productData['category']]);
             $product->setName($productData['name']);
             $product->setDescription($productData['description']);
-            $product->setCategory($categories[$productData['category']]);
-            $product->setImageFilename($productData['image']);
+            $product->setBrand($brands[array_rand($brands)]);
+            $product->setWeight($weight[array_rand($weight)]);
             $product->setPrice(rand(10, 50) * 100);
             $product->setStockQuantity(rand(10, 100));
-            $product->setBrand($brands[array_rand($brands)]);
+            $product->setImageFilename($productData['image']);
+            $product->setcreatedAt(new \DateTime('now'));
 
             if ($productData['with_colors'] ?? false) {
                 $product->addColor($colorRed);
